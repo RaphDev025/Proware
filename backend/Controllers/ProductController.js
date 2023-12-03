@@ -69,16 +69,16 @@ const createProduct = async (req, res) => {
 
 
 
-// Serve the React app
-app.use(express.static(path.join(__dirname, 'build')));
+// // Serve the React app
+// app.use(express.static(path.join(__dirname, 'build')));
 
 
 
-// Retrieve uploaded files
-app.get('https://proware-api.vercel.app/api/uploads/:filename', (req, res) => {
-    const filename = req.params.filename;
-    res.sendFile(path.join(__dirname, 'https://proware-api.vercel.app/api/', 'uploads', filename));
-});
+// // Retrieve uploaded files
+// app.get('https://proware-api.vercel.app/api/uploads/:filename', (req, res) => {
+//     const filename = req.params.filename;
+//     res.sendFile(path.join(__dirname, 'https://proware-api.vercel.app/api/', 'uploads', filename));
+// });
 
 // Update Product
 const updateProduct = async (req, res) => {
