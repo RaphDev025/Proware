@@ -110,8 +110,8 @@ const AddToCartModal = () => {
 
     return (
         <>
-            <div style={{visibility: `${isModalOpen ? 'visible' : 'hidden'}`}} className="modal-overlay d-flex justify-content-center align-items-center  w-100 h-100 position-fixed opacity-75" >
-                <div style={{visibility: `${isModalOpen ? 'visible' : 'hidden'}`}} className="modal-cust d-flex justify-content-center align-items-center flex-column rounded-2 bg-light  opacity-75">
+            <div style={{visibility: `${isModalOpen ? 'visible' : 'hidden'}`}} className="modal-overlay d-flex justify-content-center align-items-center  w-100 h-100 position-fixed" >
+                <div style={{visibility: `${isModalOpen ? 'visible' : 'hidden'}`}} className="modal-cust d-flex justify-content-center align-items-center flex-column rounded-2 bg-light opacity-100">
                     <div className='position-relative w-100'>
                         <button className='position-absolute top-0 end-0 m-2 btn' style={{color: 'var(--blue)'}} onClick={() => {setActive(null); closeModal();}}><FaTimes size={24}/></button>
                     </div>

@@ -1,13 +1,21 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import whiteLogo from 'assets/icons/white.png'
 import yellowLogo from 'assets/icons/yellowed.png'
 import { ShoppingCart, BellIcon } from 'Components'
 import { BiUser } from 'react-icons/bi'
 import { Link } from 'react-router-dom';
 import { useNavigate  } from 'react-router-dom'; 
+import { useUserContext } from 'Context/UserContext'
 
 const Navbar = () => {
     const navigate = useNavigate()
+    const { userData } = useUserContext()
+
+    useEffect(() => {
+        if (!userData) {
+            navigate('/');
+        }
+    }, [userData, navigate]);
 
     return (
         <nav className='navbar navbar-expand-lg bg-blue px-5 p-0 fixed-top text-light'>

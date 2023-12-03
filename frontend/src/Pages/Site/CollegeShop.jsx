@@ -58,8 +58,8 @@ const CollegeShop = () => {
                         </div>
                     )}
                 </section>
-            </main>
             <AddToCartModal />
+            </main>
         </>
     )
 }

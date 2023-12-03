@@ -118,3 +118,29 @@
         outline-offset: 3px;
         border: 1px solid var(--dark-blue);
     }
+.summary{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    padding: 20px 10px 100px 10px;
+    height: 100vh;
+    justify-content: space-between;
+    position: fixed;
+    top: 50px;
+    left: calc(100% - 25%);
+}
+.item-section{
+    width: 75%;
+    height: 100%;
+    padding: 0 15px;
+}
+.button-qty{
+    outline: none;
+    border: 1px solid gray;
+    background: var(--white);
+    width: 30px;
+}
+.qty-indicator{
+    font-size: 15px;
+    padding: 1.7px 0;
+}

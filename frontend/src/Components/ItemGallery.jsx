@@ -15,7 +15,7 @@ const ItemGallery = ({ items, title, subCategory, category }) => {
         dots: false,
         speed: 500,
         arrows: false,
-        infinite: true,
+        infinite: false,
         slidesToScroll: 1,
         slidesToShow: slides || 2,
         variableWidth: true,
