@@ -19,7 +19,7 @@ const NewItemPage = () => {
     product_img: '',
     size: []
   })
-
+  const [image, setImage] = useState(null)
   const handleSizeChange = (size) => {
     if (size === 'NONE') {
       // If 'none' is selected, clear all other selected sizes
@@ -50,62 +50,7 @@ const NewItemPage = () => {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    setLoading(true)
-    try {
-      const response = await fetch('https://proware-api.vercel.app/api/products', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-      const json = await response.json()
-      if(!response.ok){
-        alert('Product Not Uploaded')
-        console.log(json)
-        setLoading(false)
-        navigate('/admin/products')
-        setFormData({
-          item_code: '',
-          item_name: '',
-          invClass: '',
-          category: '',
-          subCategory: '',
-          apparel: '',
-          qty: 0,
-          unit_price: 0,
-          product_img: '',
-          size: []
-        })
-        setSelectedSizes([])
-    }
-    if(response.ok){
-        alert('Product Uploaded')
-        setLoading(false)
-        console.log(json)
-        setFormData({
-          item_code: '',
-          item_name: '',
-          invClass: '',
-          category: '',
-          subCategory: '',
-          apparel: '',
-          qty: 0,
-          unit_price: 0,
-          product_img: '',
-          size: []
-        })
-        setSelectedSizes([])
-    }
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  }
-
-  const handleCLear = () => {
+const handleCLear = () => {
     navigate('/admin/products')
     setFormData({
       item_code: '',
@@ -120,28 +65,90 @@ const NewItemPage = () => {
     setSelectedSizes([])
   }
 
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-        const fileReader = new FileReader()
-        fileReader.readAsDataURL(file)
-
-        fileReader.onload = () => {
-            resolve(fileReader.result)
-        }
-        fileReader.onerror = (error) => {
-            reject(error)
-        }
-    })
-}
-
-const handleFileUpload = async (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files[0];
-    const base64 = await convertToBase64(file)
-    setFormData((prevData) => ({
-        ...prevData,
-        'product_img': base64,
-    }));
-}
+    setImage(file);
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    try {
+      const response = await fetch('https://proware-api.vercel.app/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+  
+        // Update the form data with the file name
+        setFormData((prevData) => ({ ...prevData, product_img: data.fileName }));
+      } else {
+        console.error('File upload failed');
+      }
+    } catch (error) {
+      console.error('Error during file upload:', error);
+    }
+  
+    console.log(file);
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    setLoading(true);
+    try {
+      const response = await fetch('https://proware-api.vercel.app/api/products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const json = await response.json();
+      if (!response.ok) {
+        alert('Product Not Uploaded');
+        console.log(json);
+        setLoading(false);
+        navigate('/admin/products');
+        setFormData({
+          item_code: '',
+          item_name: '',
+          invClass: '',
+          category: '',
+          subCategory: '',
+          apparel: '',
+          qty: 0,
+          unit_price: 0,
+          product_img: '',
+          size: [],
+        });
+        setSelectedSizes([]);
+      }
+      if (response.ok) {
+        alert('Product Uploaded');
+        setLoading(false);
+        console.log(json);
+        setFormData({
+          item_code: '',
+          item_name: '',
+          invClass: '',
+          category: '',
+          subCategory: '',
+          apparel: '',
+          qty: 0,
+          unit_price: 0,
+          product_img: '',
+          size: [],
+        });
+        setSelectedSizes([]);
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
 
   return (
     <main id='new-item' className='container-fluid'>
@@ -242,9 +249,7 @@ const handleFileUpload = async (e) => {
                 <label htmlFor='product_img' className='p-4 h-100 rounded-5 text-center'>
                     <img alt={vector || ''} height={'200px'} src={formData.product_img || vector} />
                 </label>
-                <input 
-                onChange={(e) => handleFileUpload(e)} 
-                type='file' lable='Image' className='p-2 rounded-3' id='product_img' name='product_img' accept='.jpeg, .png, .jpg' />
+                <input onChange={(e) => handleFileUpload(e)} type='file' lable='Image' className='p-2 rounded-3' id='product_img' name='product_img' accept='.jpeg, .png, .jpg' />
                 <p className='text-light text-center p-0 m-0'>Click to Upload an image</p>
                 <p style={{fontSize: '10px'}} className='text-light text-center p-0 fst-italic '>(Only .jpeg, .png, and .jpg images are accepted)</p>
               </div>

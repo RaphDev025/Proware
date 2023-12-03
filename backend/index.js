@@ -11,7 +11,6 @@ const products = require('./Routes/products')
 const cart = require('./Routes/cart')
 const order = require('./Routes/orders')
 
-
 // express app
 const app = express()
 // Enable CORS for all routes
@@ -27,10 +26,10 @@ app.use('/api/orders', order)
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'https://proware-api.vercel.app/api/uploads/'); // Specify the directory where the uploaded files will be stored
+      cb(null, 'public/Images'); // Specify the directory where the uploaded files will be stored
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname);
+        cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
     },
 });
 
@@ -40,8 +39,8 @@ const upload = multer({ storage: storage });
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Handle file upload
-app.post('https://proware-api.vercel.app/api/upload', upload.single('image'), (req, res) => {
-    res.json({ message: 'File uploaded successfully' });
+app.post('/upload', upload.single('file'), (req, res) => {
+    res.json()
 });
 
 // Retrieve uploaded files
