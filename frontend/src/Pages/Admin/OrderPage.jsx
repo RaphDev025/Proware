@@ -21,7 +21,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-          const response = await fetch('https://modiform-api.vercel.app/api/orders');
+          const response = await fetch('https://proware-api.vercel.app/api/orders');
           const json = await response.json();
           console.log(json)
           if (response.ok) {

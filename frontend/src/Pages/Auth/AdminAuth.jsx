@@ -21,7 +21,7 @@ const AdminAuth = () => {
     // Fetch user data from the user_db database
     const fetchUserData = async () => {
       try {
-        const response = await fetch('https://modiform-api.vercel.app/api/users'); // Replace with your API endpoint
+        const response = await fetch('https://proware-api.vercel.app/api/users'); // Replace with your API endpoint
         const data = await response.json();
         setUserDbData(data); // Assuming data is an array of user objects
       } catch (error) {

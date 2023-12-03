@@ -68,7 +68,7 @@ const AddToCartModal = () => {
             total_amount: totalAmount,
         }));
 
-        const response = await fetch('https://modiform-api.vercel.app/api/cart', {
+        const response = await fetch('https://proware-api.vercel.app/api/cart', {
             method: 'POST',
             body: JSON.stringify(formData),
             headers: {

@@ -24,7 +24,7 @@ const TableBody = ({ dataContents, height, subHeader }) => {
     const setStatus = async (orderId, newStatus) => {
         try {
           // Send a PATCH request to update the order status
-        const response = await fetch(`https://modiform-api.vercel.app/api/orders/${orderId}`, {
+        const response = await fetch(`https://proware-api.vercel.app/api/orders/${orderId}`, {
             method: 'PATCH',
             headers: {
             'Content-Type': 'application/json',

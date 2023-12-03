@@ -19,7 +19,7 @@ const InventoryPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-          const response = await fetch('https://modiform-api.vercel.app/api/products');
+          const response = await fetch('https://proware-api.vercel.app/api/products');
           const json = await response.json();
           console.log(json)
           if (response.ok) {
@@ -68,7 +68,7 @@ const InventoryPage = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch(`https://modiform-api.vercel.app/api/products/${formData.item_id}`, {
+      const response = await fetch(`https://proware-api.vercel.app/api/products/${formData.item_id}`, {
         method: 'PATCH', // Assuming you are using PATCH method for updates
         headers: {
           'Content-Type': 'application/json',

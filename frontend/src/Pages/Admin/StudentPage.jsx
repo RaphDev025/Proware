@@ -11,7 +11,7 @@ const StudentPage = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://modiform-api.vercel.app/api/users');
+        const response = await fetch('https://proware-api.vercel.app/api/users');
         const json = await response.json();
 
         if (response.ok) {
@@ -43,7 +43,7 @@ const StudentPage = () => {
 
   const handleDelete = async (itemToDelete) => {
     try {
-      const response = await fetch(`https://modiform-api.vercel.app/api/users/${itemToDelete._id}`, {
+      const response = await fetch(`https://proware-api.vercel.app/api/users/${itemToDelete._id}`, {
         method: 'DELETE',
       });
 

@@ -14,7 +14,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-          const response = await fetch('https://modiform-api.vercel.app/api/products');
+          const response = await fetch('https://proware-api.vercel.app/api/products');
           const json = await response.json();
           console.log(json)
           if (response.ok) {
@@ -39,7 +39,7 @@ const ProductPage = () => {
   const handleDelete = async (itemToDelete) => {
     try {
       // Make an API call to delete the item in the database
-      const response = await fetch(`https://modiform-api.vercel.app/api/products/${itemToDelete._id}`, {
+      const response = await fetch(`https://proware-api.vercel.app/api/products/${itemToDelete._id}`, {
         method: 'DELETE',
       });
 

@@ -25,7 +25,7 @@ const ToggleTable = ({data, headers, height='430px', onDelete }) => {
             }));
 
             // Make an API call to update the status in the database
-            const response = await fetch(`https://modiform-api.vercel.app/api/products/${itemId}`, {
+            const response = await fetch(`https://proware-api.vercel.app/api/products/${itemId}`, {
                 method: 'PATCH',
                 headers: {
                 'Content-Type': 'application/json',

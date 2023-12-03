@@ -9,7 +9,7 @@ const HighShop = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('https://modiform-api.vercel.app/api/products');
+                const response = await fetch('https://proware-api.vercel.app/api/products');
                 const json = await response.json();
                 console.log(json);
                 if (response.ok) {

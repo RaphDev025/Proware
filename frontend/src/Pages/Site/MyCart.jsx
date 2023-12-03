@@ -5,7 +5,7 @@ const MyCart = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('https://modiform-api.vercel.app/api/cart');
+                const response = await fetch('https://proware-api.vercel.app/api/cart');
                 const json = await response.json();
                 console.log(json);
                 if (response.ok) {

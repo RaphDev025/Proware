@@ -21,9 +21,9 @@ const Dashboard = () => {
                     ordersResponse,
                     ordersCountResponse
                 ] = await Promise.all([
-                    fetch('https://modiform-api.vercel.app/api/users/count'),
-                    fetch('https://modiform-api.vercel.app/api/orders'),
-                    fetch('https://modiform-api.vercel.app/api/orders/count')
+                    fetch('https://proware-api.vercel.app/api/users/count'),
+                    fetch('https://proware-api.vercel.app/api/orders'),
+                    fetch('https://proware-api.vercel.app/api/orders/count')
                 ]);
     
                 const [

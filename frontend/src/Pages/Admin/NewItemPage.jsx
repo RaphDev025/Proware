@@ -55,7 +55,7 @@ const NewItemPage = () => {
     
     setLoading(true)
     try {
-      const response = await fetch('https://modiform-api.vercel.app/api/products', {
+      const response = await fetch('https://proware-api.vercel.app/api/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

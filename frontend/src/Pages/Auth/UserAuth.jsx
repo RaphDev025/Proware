@@ -14,7 +14,7 @@ const UserAuth = () => {
     // Fetch user data from the API
     const fetchUserData = async () => {
       try {
-        const response = await fetch('https://modiform-api.vercel.app/api/users');
+        const response = await fetch('https://proware-api.vercel.app/api/users');
         if (response.ok) {
           const data = await response.json();
           setUserData(data);
