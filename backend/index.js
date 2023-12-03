@@ -36,19 +36,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Serve the React app
-app.use(express.static(path.join(__dirname, 'build')));
-
 // Handle file upload
-app.post('/upload', upload.single('file'), (req, res) => {
+app.post('/upload', upload.single('image'), (req, res) => {
     //res.json({ message: 'File uploaded successfully' });
     console.log('Backend: ', req.file)
-});
-
-// Retrieve uploaded files
-app.get('https://proware-api.vercel.app/api/uploads/:filename', (req, res) => {
-    const filename = req.params.filename;
-    res.sendFile(path.join(__dirname, 'https://proware-api.vercel.app/api/', 'uploads', filename));
 });
 
 // connect to db

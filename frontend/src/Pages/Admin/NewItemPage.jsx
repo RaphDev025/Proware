@@ -190,7 +190,7 @@ const NewItemPage = () => {
         <p style={{fontSize: '11px', color: 'gray'}}>Create new item</p>
       </div>
       <section className="container-fluid p-3">
-        <form onSubmit={handleSubmit} className="rounded-3 statistic p-3">
+        <div className="rounded-3 statistic p-3">
           <div className='d-flex gap-3 align-items-end mb-3'>
             <div className="dropdown statistic w-100">
               <button className="statistic-2 text-light py-2 rounded-3 dropdown-toggle w-100" style={{width: '350px'}} type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -277,27 +277,27 @@ const NewItemPage = () => {
             </div>
 
             <div className='p-3 statistic-2 rounded-3 w-100'>
-              <div className='d-flex flex-column justify-content-center'>
+              <form action='/upload' encType='multipart/form-data' method='POST' className='d-flex flex-column justify-content-center'>
                 <h6 className='text-light text-start'>Upload Item Images</h6>
                 <label htmlFor='product_img' className='p-4 h-100 rounded-5 text-center'>
                     <img alt={vector || ''} height={'200px'} src={file || vector} />
                 </label>
-                <input onChange={(e) => handleFileUpload(e)} type='file' lable='Image' className='p-2 rounded-3' id='product_img' name='product_img' accept='.jpeg, .png, .jpg' />
+                <input onChange={(e) => handleFileUpload(e)} type='file' lable='Image' className='p-2 rounded-3' id='product_img' name='image' accept='.jpeg, .png, .jpg' />
                 <p className='text-light text-center p-0 m-0'>Click to Upload an image</p>
                 <p style={{fontSize: '10px'}} className='text-light text-center p-0 fst-italic '>(Only .jpeg, .png, and .jpg images are accepted)</p>
                 <div className='d-flex justify-content-center'>
-                  <button type='button' onClick={ handleUpload } className='rounded-2 w-25 text-light px-3 py-2 button' style={{width: '300px'}}>Save Image</button>
+                  <button type='submit' className='rounded-2 w-25 text-light px-3 py-2 button' style={{width: '300px'}}>Save Image</button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
           
           <div className='d-flex gap-3 justify-content-end align-items-end flex-column'>
-            <button type='submit' disabled={!formData.product_img} className={`rounded-2 w-25 text-light px-3 py-2 ${loading || !formData.product_img ? 'loading-button' : 'button'}`} >Add Item</button>
+            <button type='button' disabled={!formData.product_img} className={`rounded-2 w-25 text-light px-3 py-2 ${loading || !formData.product_img ? 'loading-button' : 'button'}`} >Add Item</button>
             <button onClick={handleCLear} type='button' className='btn w-25 text-light px-3 py-2' style={{backgroundColor: 'var(--gray)'}}>Cancel</button>
           </div>
 
-        </form>
+        </div>
       </section>
     </main>
   )
