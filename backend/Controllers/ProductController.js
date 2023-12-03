@@ -1,7 +1,5 @@
 const Product = require('../Models/ProductModel')
 const mongoose = require('mongoose')
-const multer = require('multer');
-const path = require('path');
 
 // Get all products
 const getProducts = async (req, res) => {
@@ -25,60 +23,14 @@ const getProductId = async (req, res) => {
 
 // Create Product
 const createProduct = async (req, res) => {
-    const { invClass, category, subCategory, apparel, status, size, item_code, item_name, qty, unit_price } = req.body;
-
-    try {
-        const storage = multer.diskStorage({
-            destination: (req, file, cb) => {
-                cb(null, 'public/Images'); // Specify the directory where the uploaded files will be stored
-            },
-            filename: (req, file, cb) => {
-                const uniqueSuffix = '_' + Date.now() + '-' + Math.round(Math.random() * 1E9);
-                const fileName = file.fieldname + uniqueSuffix + path.extname(file.originalname);
-                cb(null, fileName);
-            },
-        });
-
-        const upload = multer({ storage: storage }).single('product_img');
-
-        upload(req, res, async (err) => {
-            if (err) {
-                return res.status(500).json({ error: err.message });
-            }
-
-            const product = await Product.create({
-                invClass,
-                category,
-                subCategory,
-                apparel,
-                status,
-                size,
-                item_code,
-                item_name,
-                qty,
-                unit_price,
-                product_img: req.file.filename,
-            });
-
-            res.status(200).json(product);
-        });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
+    const { invClass, category, subCategory, apparel, status, size, item_code, item_name, qty, unit_price, product_img } = req.body
+    try{
+        const product = await Product.create({ invClass, category, subCategory, apparel, status, size, item_code, item_name, qty, unit_price, product_img })
+        res.status(200).json(product)
+    }catch(error){
+        res.status(400).json({error: error.message})
     }
-};
-
-
-
-// // Serve the React app
-// app.use(express.static(path.join(__dirname, 'build')));
-
-
-
-// // Retrieve uploaded files
-// app.get('https://proware-api.vercel.app/api/uploads/:filename', (req, res) => {
-//     const filename = req.params.filename;
-//     res.sendFile(path.join(__dirname, 'https://proware-api.vercel.app/api/', 'uploads', filename));
-// });
+}
 
 // Update Product
 const updateProduct = async (req, res) => {

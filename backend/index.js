@@ -11,6 +11,7 @@ const products = require('./Routes/products')
 const cart = require('./Routes/cart')
 const order = require('./Routes/orders')
 
+
 // express app
 const app = express()
 // Enable CORS for all routes
@@ -40,7 +41,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Handle file upload
 app.post('/upload', upload.single('file'), (req, res) => {
-    res.json()
+    //res.json({ message: 'File uploaded successfully' });
+    console.log('Backend: ', req.file)
 });
 
 // Retrieve uploaded files
