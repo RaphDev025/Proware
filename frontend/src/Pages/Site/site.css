@@ -140,6 +140,9 @@
     background: var(--white);
     width: 30px;
 }
+.button-qty:hover{
+    background: var(--gray);
+}
 .qty-indicator{
     font-size: 15px;
     padding: 1.7px 0;
