@@ -1,0 +1,38 @@
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    background: gray;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: orange;
+}
+:root{
+    --blue: #0B5793;
+    --dark-blue: #102A3F;
+    --yellow: #FFF200;
+    --white: #fff;
+    --black: #0B0B0B;
+    --hover-black: #343434;
+    --hover-blue: #4A85B4;
+    --gray: #CCCCCC;
+    --dark-gray: #515151;
+
+    --black-50: #00000050;
+    --black-20: #00000020;
+    --bright-black: #121317;
+    --light-black: #1A1C23;
+    --gray: #64646480;
+    --dark-blue-2: #1A3B53;
+    --secondary-text: #B7B7B7;
+    --blue-2: #0094ff;
+    --neutral: #999;
+    --type-face: 'Inter', sans-serif;
+    --stat: #2E3039;
+}
+body{
+    height:100vh;
+}
+.App, #root{
+    height: 100%;
+}

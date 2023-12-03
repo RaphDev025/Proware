@@ -1,0 +1,57 @@
+#dash, #customer, #new-item, #order, #inventory, #product{
+    padding: 0;
+    padding-top: 40px;
+    padding-left: 160px;
+    background-color: var(--bright-black);
+}
+.header, .page-header{
+    color: var(--white);
+    font-stretch: condensed;
+    font-weight: 600;
+    font-size: 12px;
+}
+.page-header{
+    font-size: 16px;
+}
+.statistic-container{
+    grid-template-columns: 1fr 2fr;
+    grid-column-gap: 20px;
+}
+.statistic{
+    background-color: var(--light-black);
+}
+.statistic-2{
+    background-color: var(--stat);
+    border: 2px solid var(--dark-blue);
+}
+.btn-list{
+    outline: none;
+    border:none;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 12px;
+    transition: all 0.4s ease;
+}
+.btn-list.active{
+    background-color: var(--dark-blue);
+}
+.overview-container{
+    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+.grid-container{
+    grid-template-columns: repeat(auto-fit, minmax(300px, 2fr));
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+.loading-button{
+    border: none;
+    color: var(--black);
+    background-color: var(--secondary-text);
+}
+.button{
+    border: none;
+    color: var(--white);
+    background-color: var(--dark-blue);
+}

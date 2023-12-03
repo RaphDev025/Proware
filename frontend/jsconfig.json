@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src",
+        "paths": {
+            "@Components/": ["src/Components/"],
+            "@assets/": ["src/assets/"],
+            "@Pages/": ["src/Pages/"],
+            "@Views/": ["src/Views/"],
+            "@Context/": ["src/Context/"]
+        }
+    },
+    "include": ["src"]
+}
