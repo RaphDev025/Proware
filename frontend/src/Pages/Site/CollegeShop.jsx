@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import bg2 from 'assets/imges/bg2.png'
 import { AddToCartModal, ItemGallery } from 'Components' 
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const CollegeShop = () => {
-
+    const [loading, setLoading] = useState(true)
     const [itWear, setITWear] = useState(null)
     const [womenWear, setWomenWear] = useState(null)
     useEffect(() => {
@@ -14,14 +16,17 @@ const CollegeShop = () => {
                 console.log(json);
                 if (response.ok) {
                     // Assuming 'apparel' is the field indicating whether it's for men or women
-                    const menItems = json.filter(item => item.apparel === 'For Men');
-                    const womenItems = json.filter(item => item.apparel === 'For Women');
+                    const menItems = json.filter(item => item.apparel === 'For Men' && item.status === 'Selling');
+                    const womenItems = json.filter(item => item.apparel === 'For Women' && item.status === 'Selling');
     
                     setITWear(menItems);
                     setWomenWear(womenItems);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
+            }finally {
+                // Set loading to false once data is fetched
+                setLoading(false);
             }
         };
     
@@ -42,20 +47,55 @@ const CollegeShop = () => {
                         <button className={`text-uppercase rounded-1 px-4 py-1 fs-5 ${ category === 'men' ? 'bg-college text-light' : 'bg-college2' }`} onClick={() => setCategory('men')} > Men </button>
                         <button className={`text-uppercase rounded-1 px-4 py-1 fs-5 ${ category === 'women' ? 'bg-college text-light' : 'bg-college2' }`} onClick={() => setCategory('women')} > Women </button>
                     </div>
-                    {category === 'men' ? (
-                        <div className='list-section d-flex flex-column py-5 z-0'>
-                            <ItemGallery title={'Information & Communications Technology'} subCategory={'Information Technology'} category={'College'} items={itWear} />
-                            <ItemGallery title={'Tourism Management'} subCategory={'Tourism Management'} category={'College'} items={itWear} />
-                            <ItemGallery title={'Hospitality Management'} subCategory={'Hospitality Management'} category={'College'} items={itWear} />
-                            <ItemGallery title={'Business & Management'} subCategory={'Business Management'} category={'College'} items={itWear} />
+                    {loading ? (
+                        <>
+                        <div className='d-flex flex-column gap-2'>
+                            <div className='d-flex gap-2'>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        </>
                     ) : (
-                        <div className='list-section d-flex flex-column py-5 z-0'>
-                            <ItemGallery title={'Information & Communications Technology'} subCategory={'Information Technology'} category={'College'} items={womenWear} />
-                            <ItemGallery title={'Tourism Management'} subCategory={'Tourism Management'} category={'College'} items={womenWear} />
-                            <ItemGallery title={'Hospitality Management'} subCategory={'Hospitality Management'} category={'College'} items={womenWear} />
-                            <ItemGallery title={'Business & Management'} subCategory={'Business Management'} category={'College'} items={womenWear} />
-                        </div>
+                    <>
+                        {category === 'men' ? (
+                            <div className='list-section d-flex flex-column py-5 z-0'>
+                                <ItemGallery title={'Information & Communications Technology'} subCategory={'Information Technology'} category={'College'} items={itWear} />
+                                <ItemGallery title={'Tourism Management'} subCategory={'Tourism Management'} category={'College'} items={itWear} />
+                                <ItemGallery title={'Hospitality Management'} subCategory={'Hospitality Management'} category={'College'} items={itWear} />
+                                <ItemGallery title={'Business & Management'} subCategory={'Business Management'} category={'College'} items={itWear} />
+                            </div>
+                        ) : (
+                            <div className='list-section d-flex flex-column py-5 z-0'>
+                                <ItemGallery title={'Information & Communications Technology'} subCategory={'Information Technology'} category={'College'} items={womenWear} />
+                                <ItemGallery title={'Tourism Management'} subCategory={'Tourism Management'} category={'College'} items={womenWear} />
+                                <ItemGallery title={'Hospitality Management'} subCategory={'Hospitality Management'} category={'College'} items={womenWear} />
+                                <ItemGallery title={'Business & Management'} subCategory={'Business Management'} category={'College'} items={womenWear} />
+                            </div>
+                        )}
+                    </>
                     )}
                 </section>
             <AddToCartModal />

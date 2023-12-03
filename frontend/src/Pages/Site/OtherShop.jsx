@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import bg2 from 'assets/imges/BE_FUTURE-READY_BE_STI_3.png'
 import { ItemGallery, AddToCartModal } from 'Components' 
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const OtherShop = () => {
+    const [loading, setLoading] = useState(true)
     const [Wear, setWear] = useState(null)
     useEffect(() => {
         const fetchProducts = async () => {
@@ -12,12 +15,15 @@ const OtherShop = () => {
                 console.log(json);
                 if (response.ok) {
                     // Assuming 'apparel' is the field indicating whether it's for men or women
-                    const menItems = json.filter(item => item.apparel === 'Others');
+                    const menItems = json.filter(item => item.apparel === 'Others' && item.status === 'Selling');
     
                     setWear(menItems);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
+            }finally {
+                // Set loading to false once data is fetched
+                setLoading(false);
             }
         };
     
@@ -33,7 +39,41 @@ const OtherShop = () => {
                 </section>
                 <section className='p-5 h-100 '>  
                     <div className='list-section d-flex flex-column py-5 z-0'>
-                        <ItemGallery title={'Others'} category={'Others'} items={Wear} />
+                    {loading ? (
+                        <>
+                        <div className='d-flex flex-column gap-2'>
+                            <div className='d-flex gap-2'>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                                <div className='d-flex gap-2 p-2'>
+                                    <Skeleton count={2} height={50} />
+                                    <div className='p-2 border-top'>
+                                        <Skeleton count={1} height={20} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </>
+                    ) : (<>
+                            <ItemGallery title={'Others'} category={'Others'} items={Wear} />
+                        </>
+                    )}
                     </div>
                 </section>
             </main>
