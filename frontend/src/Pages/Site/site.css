@@ -121,6 +121,7 @@
 .summary{
     display: flex;
     flex-direction: column;
+    gap: 10px;
     width: 25%;
     padding: 20px 10px 100px 10px;
     height: 100vh;
