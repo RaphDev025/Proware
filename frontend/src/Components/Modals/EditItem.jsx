@@ -66,12 +66,14 @@ const EditItem = () => {
     
             if (response.ok) {
                 // Placeholder logic - replace with your own logic
-                console.log('Changes saved successfully:', editedItem);
+                console.log('Changes saved successfully:', editedItem)
+                alert('Changes saved successfully!')
     
                 // Close the modal and clear the selected item
                 clearSelectedItem();
             } else {
-                console.error('Failed to save changes:', response.statusText);
+                console.error('Failed to save changes:', response.statusText)
+                alert('Changes Unsuccessfully!')
             }
         } catch (error) {
             console.error('Error saving changes:', error);
