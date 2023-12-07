@@ -9,7 +9,7 @@ const products = require('./Routes/products')
 const cart = require('./Routes/cart')
 const order = require('./Routes/orders')
 const history = require('./Routes/history')
-const notif = require('./Routes/notif')
+
 
 // express app
 const app = express()
@@ -24,7 +24,7 @@ app.use('/api/products', products)
 app.use('/api/cart', cart)
 app.use('/api/orders', order)
 app.use('/api/history', history)
-app.use('/api/notif', notif)
+
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
