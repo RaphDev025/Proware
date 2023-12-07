@@ -152,7 +152,7 @@ const MyCart = () => {
                         {cart.map((item) => (
                             <div onClick={() => handleItemClick(item._id)} key={item._id} className={`border d-flex border-2 p-3 cursor-pointer ${selectedItemId === item._id ? 'border-info' : ''}`} >
                                 <div className={`d-flex gap-3 w-100 `}>
-                                    <div className='w-25 d-flex bg-dark-subtle opacity-50'>
+                                    <div className='w-25 d-flex bg-dark-subtle'>
                                         <img src={item.product_img || yellowLogo} width={'100%'} height={'250px'} alt={item.item_name} />
                                     </div>
                                     <div className='d-flex flex-column w-75 justify-content-around'>
@@ -160,12 +160,12 @@ const MyCart = () => {
                                             <div>
                                                 <h4>{item.item_name}</h4>
                                                 <p className='m-0' style={{ fontSize: '12px' }}>
-                                                    Product ID: {item._id}
+                                                    Product ID: {item.item_code}
                                                 </p>
                                             </div>
                                             <div>
                                                 <button type='button' className='btn btn-sm btn-outline-danger' onClick={() => handleDeleteItem(item._id)} >
-                                                    <IconPark path={'mdi:trash-can-outline'} size={23} />
+                                                    <IconPark path={'healthicons:x-outline'} size={23} />
                                                 </button>
                                             </div>
                                         </div>

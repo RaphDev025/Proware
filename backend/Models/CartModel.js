@@ -6,6 +6,11 @@ const CartSchema = new Schema({
         type: ObjectId,
         unique: false
     },
+    item_code:{
+        type: String,
+        required: true,
+        unique: false
+    },
     item_name: {
         type: String,
         required: true,
