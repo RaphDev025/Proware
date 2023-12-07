@@ -8,7 +8,7 @@ const users = require('./Routes/users')
 const products = require('./Routes/products')
 const cart = require('./Routes/cart')
 const order = require('./Routes/orders')
-const history = require('./Routes/history')
+
 
 
 // express app
@@ -23,7 +23,7 @@ app.use('/api/users', users)
 app.use('/api/products', products)
 app.use('/api/cart', cart)
 app.use('/api/orders', order)
-app.use('/api/history', history)
+
 
 
 // connect to db
