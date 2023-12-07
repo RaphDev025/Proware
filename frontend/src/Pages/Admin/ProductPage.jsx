@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {ToggleTable, ViewItem} from 'Components'
+import {ToggleTable, EditItem, ViewItem} from 'Components'
 import { useNavigate  } from 'react-router-dom';
 
 const ProductPage = () => {
@@ -122,6 +122,7 @@ const ProductPage = () => {
         </div>
       </section>
       <ViewItem />
+      <EditItem />
     </main>
   )
 }

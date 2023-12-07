@@ -106,7 +106,7 @@ const TableBody = ({dataContents, height, onDelete, onCheckboxChange, checkedIte
                 </span>
 
                 <span className='w-100' style={{fontSize: '12px'}} role='cell'>
-                    <button className='btn btn-sm text-light'>  
+                    <button className='btn btn-sm text-light' onClick={() => selectItem(data)} data-bs-toggle="modal" data-bs-target="#editItem">  
                         <IconPark path={iconPath('', 'messages', 'akar-icons:edit', 'akar-icons:edit')} size={20} />
                     </button>
                     <button className='btn btn-sm text-light' onClick={() => onDelete(data)}>  
