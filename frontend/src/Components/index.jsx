@@ -18,7 +18,8 @@ import ItemGallery from './ItemGallery'
 import AddCart from './Modals/AddCart'
 import ViewItem from './Modals/ViewItem'
 import EditItem from './Modals/EditItem'
+import ConfirmationModal from './Modals/ConfirmationModal'
 
 import './components.css'
 
-export { Navbar, EditItem, ViewItem, ShoppingCart, BellIcon, ItemGallery, Footer, SliderWrapper, SliderCard, AddToCartModal, Navigation, ToggleTable, Table2, Table3, SubDetails, Table, DoughnutChart, LineChart, AddCart, Overview }
+export { Navbar, ConfirmationModal, EditItem, ViewItem, ShoppingCart, BellIcon, ItemGallery, Footer, SliderWrapper, SliderCard, AddToCartModal, Navigation, ToggleTable, Table2, Table3, SubDetails, Table, DoughnutChart, LineChart, AddCart, Overview }

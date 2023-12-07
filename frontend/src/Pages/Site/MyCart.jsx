@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import yellowLogo from 'assets/images/yellowed.png';
 import { IconPark } from 'assets/SvgIcons';
 import { useUserContext } from 'Context/UserContext';
+import { ConfirmationModal } from 'Components'
 
 const MyCart = () => {
   const { userData } = useUserContext();
@@ -295,12 +296,13 @@ const MyCart = () => {
             <p className='text-secondary m-0' style={{ fontSize: '12px' }}>
               Confirmed orders CANNOT BE MODIFIED
             </p>
-            <button onClick={handleSubmit} className='text-uppercase w-100 p-2 btn-def'>
+            <button data-bs-toggle="modal" data-bs-target="#confirmation" className='text-uppercase w-100 p-2 btn-def'>
               Checkout
             </button>
             <button className='text-uppercase w-100 p-2 btn-def-outline'>Continue Browsing</button>
           </div>
         </section>
+        <ConfirmationModal />
       </main>
     </>
   );

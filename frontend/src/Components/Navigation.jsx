@@ -57,7 +57,7 @@ const Navigation = () => {
               </Link>
             </li>
             <li onClick={() => handleActiveItem('mssg', setItem)}>
-              <Link to='order' className='w-100 p-2 list-itm rounded-2 gap-2 text-decoration-none d-flex align-items-center fw-medium'>
+              <Link to='messages' className='w-100 p-2 list-itm rounded-2 gap-2 text-decoration-none d-flex align-items-center fw-medium'>
                 <IconPark path={iconPath(item, 'mssg', 'ri:message-line', 'ri:message-line')} size={20} /> Messages
               </Link>
             </li>

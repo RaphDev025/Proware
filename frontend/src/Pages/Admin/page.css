@@ -4,6 +4,15 @@
     padding-left: 160px;
     background-color: var(--bright-black);
 }
+.button-def{
+    background-color: var(--bright-black);
+    outline: none;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+}
+    .button-def:hover{
+        background-color: #2E3039;
+    }
 .header, .page-header{
     color: var(--white);
     font-stretch: condensed;

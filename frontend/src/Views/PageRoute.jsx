@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigation } from 'Components'
-import { Dashboard, InventoryPage, OrderPage, NewItemPage, StudentPage, ProductPage } from 'Pages/Admin';
+import { Dashboard, InventoryPage, OrderPage, NewItemPage, Messages, StudentPage, ProductPage } from 'Pages/Admin';
 import { Routes, Route } from 'react-router-dom'
 
 const PageRoute = () => {
@@ -9,6 +9,7 @@ const PageRoute = () => {
       <Navigation />
       <Routes>
           <Route path='/dashboard' element={<Dashboard/>} />
+          <Route path='/messages' element={<Messages />} />
           <Route path='/inventory' element={<InventoryPage/>} />
           <Route path='/order' element={<OrderPage/>} />
           <Route path='/new-item' element={<NewItemPage/>} />
