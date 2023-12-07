@@ -28,6 +28,7 @@ const ViewItem = () => {
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
+                        <img src={product_img} alt={product_img} className='d-flex text-center' style={{width: '200px', height: '200px'}} />
                         <p><strong>Item Code:</strong> {item_code}</p>
                         <p><strong>Item Name:</strong> {item_name}</p>
                         <p><strong>Unit Price:</strong> {unit_price}</p>
@@ -37,7 +38,6 @@ const ViewItem = () => {
                         <p><strong>Subcategory:</strong> {subCategory}</p>
                         <p><strong>Apparel:</strong> {apparel}</p>
                         <p><strong>Status:</strong> {status}</p>
-                        <p><strong>Product Image:</strong> {product_img}</p>
                         <p><strong>Size:</strong> {size && size.join(', ')}</p>
                     </div>
                     <div className="modal-footer">
