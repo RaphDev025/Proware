@@ -7,7 +7,6 @@ const getOrders = async (req, res) => {
     res.status(200).json(orders)
 }
 
-
 // Create 
 const createOrder = async (req, res) => {
     const { total_qty, total_amount, item_list, user_name, user_id, status } = req.body

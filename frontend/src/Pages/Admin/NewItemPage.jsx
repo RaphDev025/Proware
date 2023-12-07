@@ -167,7 +167,6 @@ const handleFileUpload = async (e) => {
                 {formData.category ? formData.category : 'Category'}
               </button>
               <ul className="dropdown-menu">
-                <li><p className="dropdown-item" onClick={() => handleDropdownChange('category', 'Faculty')}>Faculty</p></li>
                 <li><p className="dropdown-item" onClick={() => handleDropdownChange('category', 'College')}>College</p></li>
                 <li><p className="dropdown-item" onClick={() => handleDropdownChange('category', 'Senior High')}>Senior High</p></li>
                 <li><p className="dropdown-item" onClick={() => handleDropdownChange('category', 'Junior High')}>Junior High</p></li>

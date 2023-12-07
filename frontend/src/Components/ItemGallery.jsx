@@ -43,7 +43,7 @@ const ItemGallery = ({ items, title, subCategory, category }) => {
         if (category === 'Others') {
             // If the category is College, filter by subCategory
             return items && Array.isArray(items)
-            ? items.filter((item) => item.category === category)
+            ? items.filter((item) => item.invClass === category)
             : [];
         }
     };

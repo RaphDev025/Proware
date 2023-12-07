@@ -17,8 +17,8 @@ const MyCart = () => {
                 console.log(json);
                 if (response.ok) {
                     // Assuming 'apparel' is the field indicating whether it's for men or women
-                    
                     setCart(json);
+                    console.log(json)
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);

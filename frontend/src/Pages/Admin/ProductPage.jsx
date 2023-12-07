@@ -96,10 +96,10 @@ const ProductPage = () => {
             </button>
             <ul className="dropdown-menu">
               <li><p className="dropdown-item" onClick={() => handleCategoryChange('All')}>All</p></li>
-              <li><p className="dropdown-item" onClick={() => handleCategoryChange('Faculty')}>Faculty</p></li>
               <li><p className="dropdown-item" onClick={() => handleCategoryChange('College')}>College</p></li>
               <li><p className="dropdown-item" onClick={() => handleCategoryChange('Senior High')}>Senior High</p></li>
               <li><p className="dropdown-item" onClick={() => handleCategoryChange('Junior High')}>Junior High</p></li>
+              <li><p className="dropdown-item" onClick={() => handleCategoryChange('Others')}>Others</p></li>
             </ul>
           </div>
 

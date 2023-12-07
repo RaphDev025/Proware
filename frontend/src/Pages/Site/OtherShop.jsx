@@ -15,7 +15,7 @@ const OtherShop = () => {
                 console.log(json);
                 if (response.ok) {
                     // Assuming 'apparel' is the field indicating whether it's for men or women
-                    const menItems = json.filter(item => item.apparel === 'Others' && item.status === 'Selling');
+                    const menItems = json.filter(item => item.invClass === 'Others' && item.status === 'Selling');
     
                     setWear(menItems);
                 }

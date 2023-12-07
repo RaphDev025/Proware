@@ -23,9 +23,9 @@ const getCartId = async (req, res) => {
 
 // Create Product
 const createCart = async (req, res) => {
-    const { item_id, item_name, qty, unit_price, total_amount, user_id, user_name, category } = req.body
+    const { item_id, item_name, qty, unit_price, total_amount, user_id, user_name, category, product_img } = req.body
     try{
-        const cart = await Cart.create({ item_id, item_name, qty, unit_price, total_amount, user_id, user_name, category })
+        const cart = await Cart.create({ item_id, item_name, qty, unit_price, total_amount, user_id, user_name, category, product_img })
         res.status(200).json(cart)
     }catch(error){
         res.status(400).json({error: error.message})

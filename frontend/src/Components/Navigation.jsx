@@ -53,7 +53,7 @@ const Navigation = () => {
             </li>
             <li onClick={() => handleActiveItem('customers', setItem)}>
               <Link to='student-list' className='w-100 p-2 list-itm rounded-2 gap-2 text-decoration-none d-flex align-items-center fw-medium'>
-                <IconPark path={iconPath(item, 'customers', 'teenyicons:users-outline', 'teenyicons:users-outline')} size={20} /> Customers
+                <IconPark path={iconPath(item, 'customers', 'teenyicons:users-outline', 'teenyicons:users-outline')} size={20} /> Users
               </Link>
             </li>
             <li onClick={() => handleActiveItem('mssg', setItem)}>

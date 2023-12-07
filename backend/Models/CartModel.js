@@ -36,7 +36,8 @@ const CartSchema = new Schema({
     category: {
         type: String,
         unique: false
-    }
+    },
+    product_img: String
 }, { timestamps: true })
 
 module.exports = mongoose.model('Cart', CartSchema, 'cart_db') 

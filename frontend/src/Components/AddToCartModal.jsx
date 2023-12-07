@@ -9,6 +9,7 @@ const AddToCartModal = () => {
     const [isActive, setActive] = useState(null)
     const [quantity, setQuantity] = useState(1)
     const { userData } = useUserContext()
+    const [availableSizes, setAvailableSizes] = useState([])
 
     // New state for form data
     const [formData, setFormData] = useState({
@@ -20,7 +21,8 @@ const AddToCartModal = () => {
         total_amount: 0, // Add the logic for calculating the total amount
         user_id: '',
         user_name: '',
-        category: ''
+        category: '',
+        product_img: ''
     })
 
     useEffect(() => {
@@ -35,9 +37,17 @@ const AddToCartModal = () => {
                 user_id: userData.user_id,
                 user_name: userData.user_name,
                 category: userData.category,
+                product_img: itemData.product_img
             }));
         }
     }, [itemData, userData])
+
+    useEffect(() => {
+        // Set available sizes based on the 'size' property of itemData
+        if (itemData && itemData.size && Array.isArray(itemData.size)) {
+            setAvailableSizes(itemData.size);
+        }
+    }, [itemData]);
 
     if (!isModalOpen || !itemData) {
         return null
@@ -48,7 +58,7 @@ const AddToCartModal = () => {
     }
 
     const handleIncrement = () => {
-        setQuantity((prevQuantity) => prevQuantity + 1);
+        setQuantity((prevQuantity) => prevQuantity < 3 ? prevQuantity + 1 : 3);
     }
     const handleSizeClick = (size) => {
         setActive(size);
@@ -122,48 +132,23 @@ const AddToCartModal = () => {
                             <p className='fw-bold fs-5 m-0'>P {itemData.unit_price}.00</p>
                             <button type='button' className='btn btn-outline-secondary btn-sm px-3 py-1 mt-5' data-bs-toggle="modal" data-bs-target="#exampleModal">Size Guide</button>
                             <div>
-                                <p className='text-uppercase fw-medium fs-6 p-0 m-0 mt-5'>size</p>
+                                <p className='text-uppercase fw-medium fs-6 p-0 m-0 mt-5'>available sizes</p>
                                 <ul className='list-group list-group-horizontal'>
-                                    <li style={{backgroundColor: `${isActive === 's' ? 'var(--dark-blue)' : ''}`}} 
-                                        className={`${isActive === 's' ? 'text-light' : ''} list-group-item list-group-item-action text-decoration-none`} 
-                                        onClick={() => handleSizeClick('s')}>
-                                        S
+                                {availableSizes.map((size) => (
+                                    <li key={size} style={{ backgroundColor: `${isActive === size ? 'var(--dark-blue)' : ''}`, }} className={`${isActive === size ? 'text-light' : ''} list-group-item text-uppercase text-center list-group-item-action text-decoration-none`} onClick={() => handleSizeClick(size)}  >
+                                    {size}
                                     </li>
-                                    <li style={{backgroundColor: `${isActive === 'm' ? 'var(--dark-blue)' : ''}`}} 
-                                        className={`${isActive === 'm' ? 'text-light' : ''} list-group-item list-group-item-action text-decoration-none`} 
-                                        onClick={() => handleSizeClick('m')}>
-                                        M
-                                    </li>
-                                    <li style={{backgroundColor: `${isActive === 'l' ? 'var(--dark-blue)' : ''}`}} 
-                                        className={`${isActive === 'l' ? 'text-light' : ''} list-group-item list-group-item-action text-decoration-none`} 
-                                        onClick={() => handleSizeClick('l')}>
-                                        L
-                                    </li>
-                                    <li style={{backgroundColor: `${isActive === 'xl' ? 'var(--dark-blue)' : ''}`}} 
-                                        className={`${isActive === 'xl' ? 'text-light' : ''} list-group-item list-group-item-action text-decoration-none`} 
-                                        onClick={() => handleSizeClick('xl')}>
-                                        XL
-                                    </li>
-                                    <li style={{backgroundColor: `${isActive === '2xl' ? 'var(--dark-blue)' : ''}`}} 
-                                        className={`${isActive === '2xl' ? 'text-light' : ''} list-group-item list-group-item-action text-decoration-none`} 
-                                        onClick={() => handleSizeClick('2xl')}>
-                                        2XL
-                                    </li>
-                                    <li style={{backgroundColor: `${isActive === '3xl' ? 'var(--dark-blue)' : ''}`}} 
-                                        className={`${isActive === '3xl' ? 'text-light' : ''} list-group-item list-group-item-action text-decoration-none`} 
-                                        onClick={() => handleSizeClick('3xl')}>
-                                        3XL
-                                    </li>
+                                ))}
                                 </ul>
                             </div>
-                            <div className='d-flex gap-2 align-items-end mt-5'>
+                            <div className='d-flex gap-2 align-items-end justify-content-between w-100 mt-5'>
                                 <div className='d-flex flex-column w-50'>
                                     <p className='fw-medium text-uppercase fs-6 p-0 m-0'>Quantity</p>
                                     <div className='d-flex'>
                                         <ul className='list-group list-group-horizontal '>
                                             <li className='list-group-item list-group-item-action ac p-0 py-2 d-flex align-items-center justify-content-center' onClick={handleDecrement}><FaMinus style={{color: 'var(--blue)'}} size={12}/></li>
                                             <li className='list-group-item list-group-item-action p-0 d-flex justify-content-center align-items-center'>
-                                                <input type='number' onChange={(e) => setQuantity(parseInt(e.target.value, 10) || 1)} min='1' value={quantity} className='w-100 inpt text-end'/>
+                                                <input type='number' onChange={(e) => setQuantity(parseInt(e.target.value, 10) || 1)} min={1} max={3}  value={quantity} className='w-100 inpt text-end'/>
                                             </li>
                                             <li className='list-group-item list-group-item-action ac p-0 py-2 d-flex align-items-center justify-content-center' onClick={handleIncrement}><FaPlus style={{color: 'var(--blue)'}} size={12}/></li>
                                         </ul>

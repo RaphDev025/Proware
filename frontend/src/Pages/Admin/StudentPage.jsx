@@ -60,7 +60,7 @@ const StudentPage = () => {
   return (
     <main id="customer" className="container-fluid ">
       <div className="px-3 pt-3">
-        <h2 className="py-2 page-header">Customer Management</h2>
+        <h2 className="py-2 page-header">User Management</h2>
       </div>
       <section className="container-fluid p-3">
         <div className="rounded-3 statistic p-3">
