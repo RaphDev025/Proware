@@ -21,6 +21,7 @@ const CartSchema = new Schema({
         required: true,
         default: 0.00
     },
+    size: String,
     qty: {
         type: Number,
         required: true,

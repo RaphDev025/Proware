@@ -14,6 +14,7 @@ const AddToCartModal = () => {
     // New state for form data
     const [formData, setFormData] = useState({
         item_id: '',
+        item_code: '',
         item_name: '',
         size: '',
         qty: 1,
@@ -32,6 +33,7 @@ const AddToCartModal = () => {
             setFormData((prevData) => ({
                 ...prevData,
                 item_id: itemData._id,
+                item_code: itemData.item_code,
                 item_name: itemData.item_name,
                 unit_price: itemData.unit_price,
                 user_id: userData.user_id,
@@ -76,6 +78,7 @@ const AddToCartModal = () => {
             ...prevData,
             qty: quantity,
             total_amount: totalAmount,
+            size: isActive,
         }));
 
         const response = await fetch('https://proware-api.vercel.app/api/cart', {
@@ -92,28 +95,32 @@ const AddToCartModal = () => {
             alert('Cart Item Not Uploaded')
             setFormData({
                 item_id: '',
+                item_code: '',
                 item_name: '',
                 size: '',
                 qty: 1,
                 unit_price: 0, // Add the actual unit price
-                total_amount: 0, 
+                total_amount: 0, // Add the logic for calculating the total amount
                 user_id: '',
                 user_name: '',
-                category: ''
+                category: '',
+                product_img: ''
             })
         }
         if(response.ok){
             alert('Cart Item Uploaded')
             setFormData({
                 item_id: '',
+                item_code: '',
                 item_name: '',
                 size: '',
                 qty: 1,
                 unit_price: 0, // Add the actual unit price
-                total_amount: 0, 
+                total_amount: 0, // Add the logic for calculating the total amount
                 user_id: '',
                 user_name: '',
-                category: ''
+                category: '',
+                product_img: ''
             })
         }
     }

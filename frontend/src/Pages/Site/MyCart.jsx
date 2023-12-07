@@ -51,29 +51,6 @@ const MyCart = () => {
         );
     };
 
-    // const handleItemClick = (itemId) => {
-    //     // Toggle selection
-    //     setSelectedItemId((prevSelectedItemId) =>
-    //         prevSelectedItemId === itemId ? null : itemId
-    //     );
-    
-    //     // Check if the item is already selected
-    //     const isSelected = selectedItems.some((item) => item._id === itemId);
-    
-    //     if (!isSelected) {
-    //       // Find the selected item from the cart
-    //         const selectedItem = cart.find((item) => item._id === itemId);
-        
-    //         // Add the selected item to the list
-    //         setSelectedItems((prevSelectedItems) => [
-    //             ...prevSelectedItems,
-    //             selectedItem,
-    //         ]);
-        
-    //         // Recalculate total quantity and total amount
-    //         computeTotals();
-    //     }
-    // };
     useEffect(() => {
         // Function to compute totals
         const computeTotals = () => {
@@ -178,8 +155,15 @@ const MyCart = () => {
                                                 </p>
                                                 <button onClick={() => handleIncrease(item._id)} className='m-0 px-1 rounded-2 button-qty' > + </button>
                                             </div>
-                                            <div>
-
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {item.size}
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                                         <div>
