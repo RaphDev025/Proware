@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {IconPark} from 'assets/SvgIcons'
 import {iconPath} from 'Utils/handlingFunction'
+import { useItemContext } from 'Context/ItemContext';
 
 const ToggleTable = ({data, headers, height='430px', onDelete }) => {
     // State to keep track of the checked checkboxes
@@ -58,6 +59,7 @@ const ToggleTable = ({data, headers, height='430px', onDelete }) => {
 }
 
 const TableBody = ({dataContents, height, onDelete, onCheckboxChange, checkedItems }) => {
+    const { selectedItem, selectItem, clearSelectedItem } = useItemContext();
 
     return(
         <div className='d-flex flex-column w-100 gap-2 table-container' role='rowgroup' style={{height: height}}>
@@ -88,7 +90,7 @@ const TableBody = ({dataContents, height, onDelete, onCheckboxChange, checkedIte
                 </span>
 
                 <span className='w-100 text-truncate' style={{fontSize: '12px'}} role='cell'>
-                    <button className='btn text-light'>
+                    <button className='btn text-light' type='button' onClick={() => selectItem(data)}  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <IconPark path={iconPath('', 'messages', 'heroicons:magnifying-glass-plus-20-solid', 'heroicons:magnifying-glass-plus-20-solid')} size={20} />
                     </button>
                 </span>

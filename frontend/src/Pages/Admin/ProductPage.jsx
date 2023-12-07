@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {ToggleTable} from 'Components'
+import {ToggleTable, ViewItem} from 'Components'
 import { useNavigate  } from 'react-router-dom';
 
 const ProductPage = () => {
@@ -121,6 +121,7 @@ const ProductPage = () => {
           <ToggleTable headers={headers} data={filteredData} height={'460px'} onDelete={handleDelete}/>
         </div>
       </section>
+      <ViewItem />
     </main>
   )
 }

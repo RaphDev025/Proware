@@ -16,7 +16,8 @@ import Table3 from './Table3'
 import ToggleTable from './ToggleTable'
 import ItemGallery from './ItemGallery'
 import AddCart from './Modals/AddCart'
+import ViewItem from './Modals/ViewItem'
 
 import './components.css'
 
-export { Navbar, ShoppingCart, BellIcon, ItemGallery, Footer, SliderWrapper, SliderCard, AddToCartModal, Navigation, ToggleTable, Table2, Table3, SubDetails, Table, DoughnutChart, LineChart, AddCart, Overview }
+export { Navbar, ViewItem, ShoppingCart, BellIcon, ItemGallery, Footer, SliderWrapper, SliderCard, AddToCartModal, Navigation, ToggleTable, Table2, Table3, SubDetails, Table, DoughnutChart, LineChart, AddCart, Overview }
