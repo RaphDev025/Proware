@@ -130,6 +130,38 @@
     top: 50px;
     left: calc(100% - 25%);
 }
+.btn-def{
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: center;
+    border: 2px solid var(--dark-blue);
+    outline: none;
+    border-radius: 5px;
+    transition: 0.4s ease-in;
+    color: var(--white);
+}
+    .btn-def:hover{
+        background-color: var(--yellow);
+        color: var(--dark-blue);
+        outline-offset: 5px;
+        outline-color: var(--yellow);
+    }
+.btn-def-outline{
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    border: 2px solid var(--dark-blue);
+    outline: none;
+    border-radius: 5px;
+    transition: 0.4s ease-in;
+    color: var(--dark-blue);
+}
+    .btn-def-outline:hover{
+        background-color: var(--yellow);
+        color: var(--dark-blue);
+        outline-offset: 5px;
+        outline-color: var(--yellow);
+    }
 .item-section{
     width: 75%;
     height: 100%;
