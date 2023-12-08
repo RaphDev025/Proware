@@ -172,7 +172,6 @@ const AddToCartModal = () => {
                                         } list-group-item text-uppercase text-center list-group-item-action text-decoration-none`}
                                         onClick={() => {
                                         handleSizeClick(size);
-                                        updateDisplayedSizes(size);
                                         }}
                                         disabled={!itemData.size.includes(size)}
                                     >
