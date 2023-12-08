@@ -34,10 +34,10 @@ const OrderPage = () => {
     fetchProducts()
   }, [])
 
-  const filteredOrders = orders &&  orders.filter(order => {
-    const userIdMatch = order.user_id.includes(searchUserId);
+  const filteredOrders = orders && orders.filter(order => {
+    const userIdMatch = order.user_id && order.user_id.includes(searchUserId);
     const statusMatch = statusFilter === 'All' || order.status === statusFilter;
-
+  
     return userIdMatch && statusMatch;
   });
 
