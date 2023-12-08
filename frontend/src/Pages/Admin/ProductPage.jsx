@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {ToggleTable, EditItem, ViewItem} from 'Components'
+import {ToggleTable} from 'Components'
 import { useNavigate  } from 'react-router-dom';
 
 const ProductPage = () => {
@@ -9,10 +9,12 @@ const ProductPage = () => {
   const [selectedDropdown, setSelectedDropdown] = useState(null)
   const [searchText, setSearchText] = useState('')
   const [inventory, setInventory] = useState(null) 
+  const [loading, setLoading] = useState(false);
 
   // Fetching Data from Database
   useEffect(() => {
     const fetchProducts = async () => {
+      setLoading(true)
       try {
           const response = await fetch('https://proware-api.vercel.app/api/products');
           const json = await response.json();
@@ -22,7 +24,9 @@ const ProductPage = () => {
           }
       } catch (error) {
           console.error('Error fetching data:', error);
-      } 
+      } finally {
+        setLoading(false)
+      }
     };
     fetchProducts()
   }, [])
@@ -110,19 +114,25 @@ const ProductPage = () => {
             <ul className="dropdown-menu">
               <li><p className="dropdown-item" onClick={() => handleDropdownChange('All')}>All</p></li>
               <li><p className="dropdown-item" onClick={() => handleDropdownChange('Uniform')}>Uniform</p></li>
-              <li><p className="dropdown-item" onClick={() => handleDropdownChange('Others')}>Others</p></li>
+              <li><p className="dropdown-item" onClick={() => handleDropdownChange('Proware')}>Proware</p></li>
             </ul>
           </div>
         </div>
       </section>
 
       <section className="container-fluid p-3 pb-4" >
-        <div className='rounded-3 d-flex align-items-start gap-3 statistic p-3 '>
-          <ToggleTable headers={headers} data={filteredData} height={'460px'} onDelete={handleDelete}/>
-        </div>
+      {loading ? ( // Render loading spinner if loading is true
+          <div className="text-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <div className='rounded-3 d-flex align-items-start gap-3 statistic p-3 '>
+            <ToggleTable headers={headers} data={filteredData} height={'460px'} onDelete={handleDelete}/>
+          </div>
+        )}
       </section>
-      <ViewItem />
-      <EditItem />
     </main>
   )
 }

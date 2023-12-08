@@ -80,7 +80,6 @@ const EditItem = () => {
         }
     };
     
-
     return (
         <div className="modal fade" id="editItem" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog">

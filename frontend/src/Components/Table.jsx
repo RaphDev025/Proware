@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { iconPath, handleStatus } from 'Utils/handlingFunction'
 import { IconPark } from 'assets/SvgIcons'
 import { format } from 'date-fns';
+import { useItemContext } from 'Context/ItemContext';
 
 const Table = ({data, headers, subHeader, height="300px"}) => {
     
@@ -14,6 +15,7 @@ const Table = ({data, headers, subHeader, height="300px"}) => {
 }
 
 const TableBody = ({ dataContents, height, subHeader }) => {
+    const { selectItem, clearSelectedItem } = useItemContext();
     const [orders, setOrders] = useState(null)
     
     useEffect(() => {
@@ -21,33 +23,55 @@ const TableBody = ({ dataContents, height, subHeader }) => {
         setOrders(dataContents);
     }, [dataContents]);
     
-    const setStatus = async (orderId, newStatus) => {
+    const setStatus = async (data, orderId, newStatus) => {
         try {
-          // Send a PATCH request to update the order status
-        const response = await fetch(`https://proware-api.vercel.app/api/orders/${orderId}`, {
-            method: 'PATCH',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ status: newStatus }),
-        });
-    
-        if (!response.ok) {
-            throw new Error('Failed to update order status');
-        }
-    
-        
-        // If the request is successful, you can update the local state to reflect the changes immediately
-        setOrders((prevOrders) =>
-            prevOrders.map((order) =>
-                order._id === orderId ? { ...order, status: newStatus } : order
-            )
-        );
+            // Send a PATCH request to update the order status
+            const response = await fetch(`https://proware-api.vercel.app/api/orders/${orderId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status: newStatus }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update order status');
+            }
+
+            // If the request is successful, you can update the local state to reflect the changes immediately
+            setOrders((prevOrders) =>
+                prevOrders.map((order) =>
+                    order._id === orderId ? { ...order, status: newStatus } : order
+                )
+            );
+
+            // Send a notification to the user with the updated status
+            const notificationData = {
+                to: data.user_id, // Assuming user_id is the recipient of the notification
+                title: 'Order Status Update',
+                content: `Your order (${orderId}) has been updated to ${newStatus}.`,
+            };
+
+            // Send a POST request to the notif_db endpoint
+            const notificationResponse = await fetch('https://proware-api.vercel.app/api/notif', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(notificationData),
+            });
+
+            if (notificationResponse.ok) {
+                console.log('Notification sent successfully');
+            } else {
+                console.error('Failed to send notification:', notificationResponse.status);
+            }
+
             console.log('Order status updated successfully');
         } catch (error) {
             console.error('Error updating order status:', error.message);
         }
-    }
+    };
     
     return (
         <div className='d-flex flex-column gap-2 table-container' role='rowgroup' style={{ height: height }}>
@@ -70,7 +94,7 @@ const TableBody = ({ dataContents, height, subHeader }) => {
                         <ul className="dropdown-menu" >
                             {['Processing', 'Canceled', 'Pending', 'Received'].map((status, index) => (
                                 <li key={index}>
-                                    <p className='dropdown-item' onClick={() => setStatus(data._id, status)} style={{ cursor: 'pointer' }} >
+                                    <p className='dropdown-item' onClick={() => setStatus(data, data._id, status)} style={{ cursor: 'pointer' }} >
                                         {status}
                                     </p>
                                 </li>
@@ -78,10 +102,10 @@ const TableBody = ({ dataContents, height, subHeader }) => {
                         </ul>
                     </div>
                     <div className='d-flex gap-2 px-3 p-0'>
-                        <button className='btn btn-sm text-light'>  
+                        <button data-bs-toggle='modal' data-bs-target='#editItem' onClick={() => {selectItem(data)}} className='btn btn-sm text-light'>  
                             <IconPark path={iconPath('', 'messages', 'ph:printer-bold', 'ph:printer-bold')} size={20} />
                         </button>
-                        <button className='btn btn-sm text-light'>
+                        <button data-bs-toggle='modal' data-bs-target='#viewItem' onClick={() => {selectItem(data)}} className='btn btn-sm text-light'>
                             <IconPark path={iconPath('', 'messages', 'heroicons:magnifying-glass-plus-20-solid', 'heroicons:magnifying-glass-plus-20-solid')} size={20} />
                         </button>
                     </div>

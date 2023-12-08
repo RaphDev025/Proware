@@ -3,12 +3,14 @@ import yellowLogo from 'assets/images/yellowed.png';
 import { IconPark } from 'assets/SvgIcons';
 import { useUserContext } from 'Context/UserContext';
 import { ConfirmationModal } from 'Components'
+import { useCheckoutContext } from 'Context/CheckoutContext';
 
 const MyCart = () => {
   const { userData } = useUserContext();
   const [cart, setCart] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const { cart2, updateCart } = useCheckoutContext();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -115,6 +117,11 @@ const MyCart = () => {
 
   const handleSubmit = async () => {
     try {
+      if (!selectedItems || selectedItems.length === 0) {
+        alert('Cannot checkout, please select items...');
+        return;
+      }
+
       const totalAmount = computeTotalAmount();
       const totalQty = computeTotalQuantity();
 
@@ -136,25 +143,11 @@ const MyCart = () => {
         item_list: itemList,
         status: 'Pending',
       };
+      updateCart(orderData)
 
-      const response = await fetch(
-        'https://proware-api.vercel.app/api/orders',
-        {
-          method: 'POST',
-          body: JSON.stringify(orderData),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      if (response.ok) {
-        setCart([]);
-        setSelectedItems([]);
-        console.log('Order placed successfully!');
-      } else {
-        console.error('Failed to place order.');
-      }
+      setCart([]);
+      setSelectedItems([]);
+      
     } catch (error) {
       console.error('Error processing order:', error);
     }
@@ -296,7 +289,7 @@ const MyCart = () => {
             <p className='text-secondary m-0' style={{ fontSize: '12px' }}>
               Confirmed orders CANNOT BE MODIFIED
             </p>
-            <button data-bs-toggle="modal" data-bs-target="#confirmation" className='text-uppercase w-100 p-2 btn-def'>
+            <button data-bs-toggle="modal" data-bs-target="#confirmation" type='button' onClick={handleSubmit} className='text-uppercase w-100 p-2 btn-def'>
               Checkout
             </button>
             <button className='text-uppercase w-100 p-2 btn-def-outline'>Continue Browsing</button>

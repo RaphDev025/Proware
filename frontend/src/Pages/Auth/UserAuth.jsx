@@ -29,7 +29,9 @@ const UserAuth = () => {
     fetchUserData();
   }, []); // Empty dependency array ensures the effect runs only once on mount
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault()
+    
     // Get input values
     const studentNumberInput = document.getElementById('user_id').value;
     const passwordInput = document.getElementById('password').value;

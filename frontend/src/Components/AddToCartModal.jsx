@@ -16,6 +16,7 @@ const AddToCartModal = () => {
         item_id: '',
         item_code: '',
         item_name: '',
+        invClass: '',
         size: '',
         qty: 1,
         unit_price: 0, // Add the actual unit price
@@ -26,6 +27,16 @@ const AddToCartModal = () => {
         product_img: ''
     })
 
+    const [displayedSizes, setDisplayedSizes] = useState([]);
+
+  useEffect(() => {
+    // Set available sizes based on the 'size' property of itemData
+    if (itemData && itemData.size && Array.isArray(itemData.size)) {
+      setAvailableSizes(itemData.size);
+      setDisplayedSizes(itemData.size); // Initially, display all available sizes
+    }
+  }, [itemData]);
+
     useEffect(() => {
         console.log("userData:", userData);
         console.log("FormData:", itemData);
@@ -35,6 +46,7 @@ const AddToCartModal = () => {
                 item_id: itemData._id,
                 item_code: itemData.item_code,
                 item_name: itemData.item_name,
+                invClass: itemData.invClass,
                 unit_price: itemData.unit_price,
                 user_id: userData.user_id,
                 user_name: userData.user_name,
@@ -66,7 +78,15 @@ const AddToCartModal = () => {
         setActive(size);
         // Update the form data with the selected size
         setFormData((prevData) => ({ ...prevData, size }));
-    }
+    };
+
+    const updateDisplayedSizes = (selectedSize) => {
+        if (selectedSize) {
+          setDisplayedSizes([selectedSize]);
+        } else {
+          setDisplayedSizes(availableSizes);
+        }
+      };
 
     const handleAddToCart = async (e) => {
         e.preventDefault();
@@ -97,6 +117,7 @@ const AddToCartModal = () => {
                 item_id: '',
                 item_code: '',
                 item_name: '',
+                invClass: '',
                 size: '',
                 qty: 1,
                 unit_price: 0, // Add the actual unit price
@@ -113,6 +134,7 @@ const AddToCartModal = () => {
                 item_id: '',
                 item_code: '',
                 item_name: '',
+                invClass: '',
                 size: '',
                 qty: 1,
                 unit_price: 0, // Add the actual unit price
@@ -141,11 +163,22 @@ const AddToCartModal = () => {
                             <div>
                                 <p className='text-uppercase fw-medium fs-6 p-0 m-0 mt-5'>available sizes</p>
                                 <ul className='list-group list-group-horizontal'>
-                                {availableSizes.map((size) => (
-                                    <li key={size} style={{ backgroundColor: `${isActive === size ? 'var(--dark-blue)' : ''}`, }} className={`${isActive === size ? 'text-light' : ''} list-group-item text-uppercase text-center list-group-item-action text-decoration-none`} onClick={() => handleSizeClick(size)}  >
-                                    {size}
+                                {displayedSizes.map((size) => (
+                                    <li
+                                        key={size}
+                                        style={{ backgroundColor: `${isActive === size ? 'var(--dark-blue)' : ''}` }}
+                                        className={`${
+                                        isActive === size ? 'text-light' : ''
+                                        } list-group-item text-uppercase text-center list-group-item-action text-decoration-none`}
+                                        onClick={() => {
+                                        handleSizeClick(size);
+                                        updateDisplayedSizes(size);
+                                        }}
+                                        disabled={!itemData.size.includes(size)}
+                                    >
+                                        {size}          
                                     </li>
-                                ))}
+                                    ))}
                                 </ul>
                             </div>
                             <div className='d-flex gap-2 align-items-end justify-content-between w-100 mt-5'>

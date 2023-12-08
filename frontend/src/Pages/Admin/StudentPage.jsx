@@ -6,23 +6,26 @@ const StudentPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [allContents, setAllContents] = useState([])
   const [filteredContents, setFilteredContents] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  // Fetching Data from Database
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch('https://proware-api.vercel.app/api/users');
-        const json = await response.json();
+ // Fetching Data from Database
+ useEffect(() => {
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch('https://proware-api.vercel.app/api/users');
+      const json = await response.json();
 
-        if (response.ok) {
-          setAllContents(json);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      if (response.ok) {
+        setAllContents(json);
       }
-    };
-    fetchUsers();
-  }, [])
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchUsers();
+}, []);
 
   useEffect(() => {
     updateFilteredContents(allContents);
@@ -72,9 +75,17 @@ const StudentPage = () => {
       </section>
       <section className="container-fluid p-3 text-light">
         <p style={{ fontSize: '14px' }}>User List</p>
-        <div className="px-4 py-3">
-          <Table2 headers={tableHeaders} data={filteredContents} onDelete={handleDelete} />
-        </div>
+        {loading ? ( // Render loading spinner if loading is true
+          <div className="text-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <div className="px-4 py-3">
+            <Table2 headers={tableHeaders} data={filteredContents} onDelete={handleDelete} />
+          </div>
+        )}
       </section>
     </main>
   );

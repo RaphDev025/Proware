@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {IconPark} from 'assets/SvgIcons'
 import {iconPath} from 'Utils/handlingFunction'
 import { useItemContext } from 'Context/ItemContext';
+import { useNavigate  } from 'react-router-dom'; 
 
 const ToggleTable = ({data, headers, height='430px', onDelete }) => {
     // State to keep track of the checked checkboxes
@@ -59,7 +60,18 @@ const ToggleTable = ({data, headers, height='430px', onDelete }) => {
 }
 
 const TableBody = ({dataContents, height, onDelete, onCheckboxChange, checkedItems }) => {
-    const { selectedItem, selectItem, clearSelectedItem } = useItemContext();
+    const { selectedItem, selectItem, clearSelectedItem } = useItemContext()
+    const navigate = useNavigate()
+
+    const handleNavigateEdit = (data) => {
+        navigate('/admin/edit-item')
+        selectItem(data)
+    }
+
+    const handleNavigateView = (data) => {
+        navigate('/admin/view-item')
+        selectItem(data)
+    }
 
     return(
         <div className='d-flex flex-column w-100 gap-2 table-container' role='rowgroup' style={{height: height}}>
@@ -90,7 +102,7 @@ const TableBody = ({dataContents, height, onDelete, onCheckboxChange, checkedIte
                 </span>
 
                 <span className='w-100 text-truncate' style={{fontSize: '12px'}} role='cell'>
-                    <button className='btn text-light' type='button' onClick={() => selectItem(data)}  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <button className='btn text-light' type='button' onClick={() => handleNavigateView(data)} >
                         <IconPark path={iconPath('', 'messages', 'heroicons:magnifying-glass-plus-20-solid', 'heroicons:magnifying-glass-plus-20-solid')} size={20} />
                     </button>
                 </span>
@@ -106,7 +118,7 @@ const TableBody = ({dataContents, height, onDelete, onCheckboxChange, checkedIte
                 </span>
 
                 <span className='w-100' style={{fontSize: '12px'}} role='cell'>
-                    <button className='btn btn-sm text-light' onClick={() => selectItem(data)} data-bs-toggle="modal" data-bs-target="#editItem">  
+                    <button className='btn btn-sm text-light' onClick={() => handleNavigateEdit(data)} >  
                         <IconPark path={iconPath('', 'messages', 'akar-icons:edit', 'akar-icons:edit')} size={20} />
                     </button>
                     <button className='btn btn-sm text-light' onClick={() => onDelete(data)}>  

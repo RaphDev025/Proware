@@ -11,6 +11,7 @@ const CartSchema = new Schema({
         required: true,
         unique: false
     },
+    invClass: String,
     item_name: {
         type: String,
         required: true,

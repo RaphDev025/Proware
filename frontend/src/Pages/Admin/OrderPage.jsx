@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {IconPark} from 'assets/SvgIcons'
 import {iconPath} from 'Utils/handlingFunction'
-import {Table} from 'Components'
+import {Table, EditItem, ViewItem} from 'Components'
 
 const OrderPage = () => {
   const headers = ['Invoice ID', 'Date', 'User ID', 'User Name', 'Total Items', 'Total Amount', 'Status', 'Action', 'Invoice']
@@ -15,7 +15,7 @@ const OrderPage = () => {
   };
 
   const handleStatusFilterChange = (selectedStatus) => {
-    setStatusFilter(selectedStatus);
+    setStatusFilter(selectedStatus)
   };
 
   useEffect(() => {
@@ -88,6 +88,8 @@ const OrderPage = () => {
           <Table data={filteredOrders} headers={headers} height={'460px'} subHeader={subHeaders} />
         </section>
       </section>
+      <ViewItem />
+      <EditItem />
     </main>
   )
 }

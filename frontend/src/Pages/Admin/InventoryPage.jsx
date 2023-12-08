@@ -4,8 +4,9 @@ import {IconPark} from 'assets/SvgIcons'
 import {iconPath} from 'Utils/handlingFunction' 
 
 const InventoryPage = () => {
-  const headers = ['Inventory Class', 'Category', 'Item Code', 'Item Description', 'In Stock']
-  const [inventory, setInventory] = useState(null) 
+  const headers = ['Inventory Class', 'Category', 'Item Code', 'Item Description', 'In Stock'];
+  const [inventory, setInventory] = useState(null);
+  const [loading, setLoading] = useState(true); // Set initial loading state to true
   const [formData, setFormData] = useState({
     item_id: '',
     item_code: '',
@@ -19,18 +20,21 @@ const InventoryPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-          const response = await fetch('https://proware-api.vercel.app/api/products');
-          const json = await response.json();
-          console.log(json)
-          if (response.ok) {
-            setInventory(json);
-          }
+        const response = await fetch('https://proware-api.vercel.app/api/products');
+        const json = await response.json();
+        console.log(json);
+        if (response.ok) {
+          setInventory(json);
+        }
       } catch (error) {
-          console.error('Error fetching data:', error);
-      } 
+        console.error('Error fetching data:', error);
+      } finally {
+        // Set loading to false when fetching is complete
+        setLoading(false);
+      }
     };
-    fetchProducts()
-  }, [])
+    fetchProducts();
+  }, []);
 
   const handleItemCodeChange = (event) => {
     const newItemCode = event.target.value;
@@ -185,9 +189,19 @@ const InventoryPage = () => {
 
       <section className='container-fluid p-3'>
         <p className='m-0 text-secondary'>Stock List</p>
-        <section className='rounded-3 d-flex align-items-end gap-3 statistic p-3'>
-          <Table3 data={inventory} headers={headers} />
-        </section>
+        {loading ? (
+          // Loader while fetching data
+          <div className="text-center">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          // Display the table when data is loaded
+          <section className='rounded-3 d-flex align-items-end gap-3 statistic p-3'>
+            <Table3 data={inventory} headers={headers} />
+          </section>
+        )}
       </section>
     </main>
   )
